@@ -1,0 +1,190 @@
+﻿@model IEnumerable<OlifransShopping.DAL.Produto>
+
+@{
+    ViewBag.Title = "Produtos";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Produtos</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Produto
+        <a href="../Admin/AddPoduto" class="btn btn-info pull-right fa fa-plus">Adicionar Novo Produto</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Produto Nome</th>
+                        <th>Descriçao</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Preço Total</th>
+                        <th>Imagem</th>
+                        <th>Ação</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Produto Nome</th>
+                        <th>Descriçao</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Preço Total</th>
+                        <th>Imagem</th>
+                        <th>Ação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        int count = 1;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.ProdutoNome</td>
+                            <td>@item.Descricao</td>
+                            <td>@item.CategoriaId</td>
+                            <td>@item.Quantidade</td>
+                            <td>@item.PrecoUnitario</td>
+                            <td>@item.Quantidade * @item.PrecoUnitario</td>
+                            <td>@item.ProdutoImage</td>
+                            <td>
+                                @Html.ActionLink("Editar", "EditarProduto", new { produtoId = item.ProdutoId })
+                            </td>
+                        </tr>
+                        count++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdutoNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusAtivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusDelete)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CriadoData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModificadoData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProdutoImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmDestaque)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoTotal)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdutoNome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusAtivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusDelete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CriadoData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModificadoData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProdutoImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmDestaque)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ProdutoId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ProdutoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ProdutoId })
+            </td>
+        </tr>
+    }
+
+    </table>*@

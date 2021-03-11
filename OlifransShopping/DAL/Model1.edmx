@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OlifransShoppingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carrinho">
+          <Key>
+            <PropertyRef Name="CarrinhoId" />
+          </Key>
+          <Property Name="CarrinhoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdutoId" Type="int" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="CarrinhoStatusId" Type="int" />
+        </EntityType>
+        <EntityType Name="CarrinhoStatus">
+          <Key>
+            <PropertyRef Name="CarrinhoStatusId" />
+          </Key>
+          <Property Name="CarrinhoStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarrinhoStatus" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoriaNome" Type="nvarchar" MaxLength="500" />
+          <Property Name="StatusAtivo" Type="bit" />
+          <Property Name="StatusDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="250" />
+          <Property Name="SobreNome" Type="nvarchar" MaxLength="250" />
+          <Property Name="Telefone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Senha" Type="nvarchar" MaxLength="150" />
+          <Property Name="StatusAtivo" Type="bit" />
+          <Property Name="StatusDelete" Type="bit" />
+          <Property Name="CriadoData" Type="datetime" />
+          <Property Name="ModificadoData" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClienteIdentificacao">
+          <Key>
+            <PropertyRef Name="ClienteIdentificacaoId" />
+          </Key>
+          <Property Name="ClienteIdentificacaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="IdentificacaoId" Type="int" />
+        </EntityType>
+        <EntityType Name="DetalhesCompra">
+          <Key>
+            <PropertyRef Name="DetalhesCompraId" />
+          </Key>
+          <Property Name="DetalhesCompraId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="Endereco" Type="nvarchar" MaxLength="500" />
+          <Property Name="Cidade" Type="nvarchar" MaxLength="200" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="200" />
+          <Property Name="Pais" Type="nvarchar" MaxLength="200" />
+          <Property Name="CodigoPostal" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="Valorpago" Type="float" />
+          <Property Name="FormaDePagamento" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Identificacao">
+          <Key>
+            <PropertyRef Name="IdentificacaoId" />
+          </Key>
+          <Property Name="IdentificacaoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdentificacaoNome" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ProdutoId" />
+          </Key>
+          <Property Name="ProdutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProdutoNome" Type="nvarchar" MaxLength="500" />
+          <Property Name="CategoriaId" Type="int" />
+          <Property Name="StatusAtivo" Type="bit" />
+          <Property Name="StatusDelete" Type="bit" />
+          <Property Name="CriadoData" Type="datetime" />
+          <Property Name="ModificadoData" Type="datetime" />
+          <Property Name="Descricao" Type="nvarchar" MaxLength="350" />
+          <Property Name="ProdutoImage" Type="varchar(max)" />
+          <Property Name="EmDestaque" Type="bit" />
+          <Property Name="Quantidade" Type="int" />
+          <Property Name="PrecoUnitario" Type="float" />
+          <Property Name="PrecoTotal" Type="float" />
+        </EntityType>
+        <EntityType Name="SlidImage">
+          <Key>
+            <PropertyRef Name="SlidImageId" />
+          </Key>
+          <Property Name="SlidImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SlidImageTitulo" Type="nvarchar" MaxLength="500" />
+          <Property Name="SlidImage" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Carrinho__Produt__151B244E">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="0..1" />
+          <End Role="Carrinho" Type="Self.Carrinho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ProdutoId" />
+            </Principal>
+            <Dependent Role="Carrinho">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalhesC__Clien__0F624AF8">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="DetalhesCompra" Type="Self.DetalhesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="DetalhesCompra">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produto__Categor__06CD04F7">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetBySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="OlifransShoppingModelStoreContainer">
+          <EntitySet Name="Carrinho" EntityType="Self.Carrinho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrinhoStatus" EntityType="Self.CarrinhoStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteIdentificacao" EntityType="Self.ClienteIdentificacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalhesCompra" EntityType="Self.DetalhesCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Identificacao" EntityType="Self.Identificacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlidImage" EntityType="Self.SlidImage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Carrinho__Produt__151B244E" Association="Self.FK__Carrinho__Produt__151B244E">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Carrinho" EntitySet="Carrinho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalhesC__Clien__0F624AF8" Association="Self.FK__DetalhesC__Clien__0F624AF8">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="DetalhesCompra" EntitySet="DetalhesCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produto__Categor__06CD04F7" Association="Self.FK__Produto__Categor__06CD04F7">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OlifransShoppingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carrinho">
+          <Key>
+            <PropertyRef Name="CarrinhoId" />
+          </Key>
+          <Property Name="CarrinhoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdutoId" Type="Int32" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="CarrinhoStatusId" Type="Int32" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK__Carrinho__Produt__151B244E" FromRole="Carrinho" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="CarrinhoStatus">
+          <Key>
+            <PropertyRef Name="CarrinhoStatusId" />
+          </Key>
+          <Property Name="CarrinhoStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarrinhoStatus1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoriaNome" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StatusAtivo" Type="Boolean" />
+          <Property Name="StatusDelete" Type="Boolean" />
+          <NavigationProperty Name="Produto" Relationship="Self.FK__Produto__Categor__06CD04F7" FromRole="Categoria" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SobreNome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Senha" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="StatusAtivo" Type="Boolean" />
+          <Property Name="StatusDelete" Type="Boolean" />
+          <Property Name="CriadoData" Type="DateTime" Precision="3" />
+          <Property Name="ModificadoData" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DetalhesCompra" Relationship="Self.FK__DetalhesC__Clien__0F624AF8" FromRole="Cliente" ToRole="DetalhesCompra" />
+        </EntityType>
+        <EntityType Name="ClienteIdentificacao">
+          <Key>
+            <PropertyRef Name="ClienteIdentificacaoId" />
+          </Key>
+          <Property Name="ClienteIdentificacaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="IdentificacaoId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DetalhesCompra">
+          <Key>
+            <PropertyRef Name="DetalhesCompraId" />
+          </Key>
+          <Property Name="DetalhesCompraId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="Endereco" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Cidade" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Pais" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="Valorpago" Type="Double" />
+          <Property Name="FormaDePagamento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__DetalhesC__Clien__0F624AF8" FromRole="DetalhesCompra" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Identificacao">
+          <Key>
+            <PropertyRef Name="IdentificacaoId" />
+          </Key>
+          <Property Name="IdentificacaoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdentificacaoNome" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ProdutoId" />
+          </Key>
+          <Property Name="ProdutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProdutoNome" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CategoriaId" Type="Int32" />
+          <Property Name="StatusAtivo" Type="Boolean" />
+          <Property Name="StatusDelete" Type="Boolean" />
+          <Property Name="CriadoData" Type="DateTime" Precision="3" />
+          <Property Name="ModificadoData" Type="DateTime" Precision="3" />
+          <Property Name="Descricao" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="ProdutoImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EmDestaque" Type="Boolean" />
+          <Property Name="Quantidade" Type="Int32" />
+          <Property Name="PrecoUnitario" Type="Double" />
+          <Property Name="PrecoTotal" Type="Double" />
+          <NavigationProperty Name="Carrinho" Relationship="Self.FK__Carrinho__Produt__151B244E" FromRole="Produto" ToRole="Carrinho" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK__Produto__Categor__06CD04F7" FromRole="Produto" ToRole="Categoria" />
+        </EntityType>
+        <EntityType Name="SlidImage">
+          <Key>
+            <PropertyRef Name="SlidImageId" />
+          </Key>
+          <Property Name="SlidImageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SlidImageTitulo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SlidImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Carrinho__Produt__151B244E">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="0..1" />
+          <End Role="Carrinho" Type="Self.Carrinho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="ProdutoId" />
+            </Principal>
+            <Dependent Role="Carrinho">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Produto__Categor__06CD04F7">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalhesC__Clien__0F624AF8">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="DetalhesCompra" Type="Self.DetalhesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="DetalhesCompra">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OlifransShoppingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carrinho" EntityType="Self.Carrinho" />
+          <EntitySet Name="CarrinhoStatus" EntityType="Self.CarrinhoStatus" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="ClienteIdentificacao" EntityType="Self.ClienteIdentificacao" />
+          <EntitySet Name="DetalhesCompra" EntityType="Self.DetalhesCompra" />
+          <EntitySet Name="Identificacao" EntityType="Self.Identificacao" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" />
+          <EntitySet Name="SlidImage" EntityType="Self.SlidImage" />
+          <AssociationSet Name="FK__Carrinho__Produt__151B244E" Association="Self.FK__Carrinho__Produt__151B244E">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Carrinho" EntitySet="Carrinho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Produto__Categor__06CD04F7" Association="Self.FK__Produto__Categor__06CD04F7">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalhesC__Clien__0F624AF8" Association="Self.FK__DetalhesC__Clien__0F624AF8">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="DetalhesCompra" EntitySet="DetalhesCompra" />
+          </AssociationSet>
+          <FunctionImport Name="GetBySearch" ReturnType="Collection(OlifransShoppingModel.GetBySearch_Result)">
+            <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetBySearch_Result">
+          <Property Type="Int32" Name="ProdutoId" Nullable="false" />
+          <Property Type="String" Name="ProdutoNome" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CategoriaId" Nullable="true" />
+          <Property Type="Boolean" Name="StatusAtivo" Nullable="true" />
+          <Property Type="Boolean" Name="StatusDelete" Nullable="true" />
+          <Property Type="DateTime" Name="CriadoData" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ModificadoData" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Descricao" Nullable="true" MaxLength="350" />
+          <Property Type="String" Name="ProdutoImage" Nullable="true" />
+          <Property Type="Boolean" Name="EmDestaque" Nullable="true" />
+          <Property Type="Int32" Name="Quantidade" Nullable="true" />
+          <Property Type="Double" Name="PrecoUnitario" Nullable="true" />
+          <Property Type="Double" Name="PrecoTotal" Nullable="true" />
+          <Property Type="Int32" Name="CategoriaId1" Nullable="true" />
+          <Property Type="String" Name="CategoriaNome" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="StatusAtivo1" Nullable="true" />
+          <Property Type="Boolean" Name="StatusDelete1" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OlifransShoppingModelStoreContainer" CdmEntityContainer="OlifransShoppingEntities">
+          <EntitySetMapping Name="Carrinho">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.Carrinho">
+              <MappingFragment StoreEntitySet="Carrinho">
+                <ScalarProperty Name="CarrinhoId" ColumnName="CarrinhoId" />
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="CarrinhoStatusId" ColumnName="CarrinhoStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrinhoStatus">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.CarrinhoStatus">
+              <MappingFragment StoreEntitySet="CarrinhoStatus">
+                <ScalarProperty Name="CarrinhoStatusId" ColumnName="CarrinhoStatusId" />
+                <ScalarProperty Name="CarrinhoStatus1" ColumnName="CarrinhoStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="CategoriaNome" ColumnName="CategoriaNome" />
+                <ScalarProperty Name="StatusAtivo" ColumnName="StatusAtivo" />
+                <ScalarProperty Name="StatusDelete" ColumnName="StatusDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="SobreNome" ColumnName="SobreNome" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="StatusAtivo" ColumnName="StatusAtivo" />
+                <ScalarProperty Name="StatusDelete" ColumnName="StatusDelete" />
+                <ScalarProperty Name="CriadoData" ColumnName="CriadoData" />
+                <ScalarProperty Name="ModificadoData" ColumnName="ModificadoData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteIdentificacao">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.ClienteIdentificacao">
+              <MappingFragment StoreEntitySet="ClienteIdentificacao">
+                <ScalarProperty Name="ClienteIdentificacaoId" ColumnName="ClienteIdentificacaoId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="IdentificacaoId" ColumnName="IdentificacaoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalhesCompra">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.DetalhesCompra">
+              <MappingFragment StoreEntitySet="DetalhesCompra">
+                <ScalarProperty Name="DetalhesCompraId" ColumnName="DetalhesCompraId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Valorpago" ColumnName="Valorpago" />
+                <ScalarProperty Name="FormaDePagamento" ColumnName="FormaDePagamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Identificacao">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.Identificacao">
+              <MappingFragment StoreEntitySet="Identificacao">
+                <ScalarProperty Name="IdentificacaoId" ColumnName="IdentificacaoId" />
+                <ScalarProperty Name="IdentificacaoNome" ColumnName="IdentificacaoNome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="ProdutoNome" ColumnName="ProdutoNome" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="StatusAtivo" ColumnName="StatusAtivo" />
+                <ScalarProperty Name="StatusDelete" ColumnName="StatusDelete" />
+                <ScalarProperty Name="CriadoData" ColumnName="CriadoData" />
+                <ScalarProperty Name="ModificadoData" ColumnName="ModificadoData" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="ProdutoImage" ColumnName="ProdutoImage" />
+                <ScalarProperty Name="EmDestaque" ColumnName="EmDestaque" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="PrecoTotal" ColumnName="PrecoTotal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlidImage">
+            <EntityTypeMapping TypeName="OlifransShoppingModel.SlidImage">
+              <MappingFragment StoreEntitySet="SlidImage">
+                <ScalarProperty Name="SlidImageId" ColumnName="SlidImageId" />
+                <ScalarProperty Name="SlidImageTitulo" ColumnName="SlidImageTitulo" />
+                <ScalarProperty Name="SlidImage1" ColumnName="SlidImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetBySearch" FunctionName="OlifransShoppingModel.Store.GetBySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OlifransShoppingModel.GetBySearch_Result">
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="ProdutoNome" ColumnName="ProdutoNome" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="StatusAtivo" ColumnName="StatusAtivo" />
+                <ScalarProperty Name="StatusDelete" ColumnName="StatusDelete" />
+                <ScalarProperty Name="CriadoData" ColumnName="CriadoData" />
+                <ScalarProperty Name="ModificadoData" ColumnName="ModificadoData" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="ProdutoImage" ColumnName="ProdutoImage" />
+                <ScalarProperty Name="EmDestaque" ColumnName="EmDestaque" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+                <ScalarProperty Name="PrecoUnitario" ColumnName="PrecoUnitario" />
+                <ScalarProperty Name="PrecoTotal" ColumnName="PrecoTotal" />
+                <ScalarProperty Name="CategoriaId1" ColumnName="CategoriaId1" />
+                <ScalarProperty Name="CategoriaNome" ColumnName="CategoriaNome" />
+                <ScalarProperty Name="StatusAtivo1" ColumnName="StatusAtivo1" />
+                <ScalarProperty Name="StatusDelete1" ColumnName="StatusDelete1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

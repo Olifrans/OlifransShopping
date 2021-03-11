@@ -1,0 +1,130 @@
+﻿
+@model OlifransShopping.Models.Home.HomeIndexViewModel
+@using PagedList;
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+
+        <div class="item active">
+            <div class="carousel-item active">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/carr1.jpg" alt="First slide">
+            </div>
+            <div class="carousel-caption">
+                <h3>Frutas  Vrduras Naturais Produzidos Sem Agredir a Natureza</h3>
+            </div>
+        </div>
+
+
+        <div class="item">
+            <div class="carousel-item active">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/car3.jpg" alt="First slide">
+            </div>
+            <div class="carousel-caption">
+                <h3> Preservando terras, matas, nascentes.</h3>
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="carousel-item active">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/car7.jpg" alt="First slide">
+            </div>
+            <div class="carousel-caption">
+                <h3>Os mais belos quadros</h3>
+            </div>
+        </div>
+    </div>
+
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+</div>
+
+
+
+<div class="olContent f1"><h2 style="color:black">Buscar Produtos</h2></div>
+<form method="post">
+    <div class="olSearch fr">
+        <input type="text" name="search" placeholder="Digite o produto que deseja buscar" class="inputComn form-control" />
+        <div class="searchIcon">
+            <button type="submit" class="searchBtn">
+                <img src="~/Images/searchIcon.png" />
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Os produtos <small>Os mais vendidos</small></h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="row product-container">
+
+    @foreach (var item in Model.ListOfProduto)
+    {
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+            <div class="thumbnail product-item" style="height:300px">
+                <img class="img-responsive" title="Click e veja detalhes do produto" style="cursor:pointer;height:160px; width:260px" src="~/ProdutoImg/@item.ProdutoImage" alt="Third slide">
+
+
+                <div class="caption">
+                    <h5>@item.ProdutoNome</h5>
+                    <p>R$ @item.PrecoUnitario</p>
+
+                    <p>
+                        @if (item.Quantidade > 0)
+                        {
+                        <p>Disponível </p>
+                            }
+                            else
+                            {
+                                <p>Não Disponível </p>
+                            }
+                       </p>
+                        <div class="product-item-badge">
+                            @if (item.EmDestaque == true)
+                            {
+                                <p>Novo </p>
+                             }
+                              else
+                              {
+                                <p>Old </p>
+                              }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+</div>
+
+
+<div class="container">
+    @*@Html.PagedListPager(Model.ListOfProduto, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true });*@
+  
+    @Html.PagedListPager(Model.ListOfProduto, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }));
+    </div>

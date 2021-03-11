@@ -1,0 +1,115 @@
+﻿@model OlifransShopping.DAL.Produto
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdutoNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdutoNome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusAtivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusAtivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CriadoData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CriadoData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModificadoData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModificadoData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdutoImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdutoImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmDestaque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmDestaque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoTotal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.CategoriaNome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.CategoriaNome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProdutoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

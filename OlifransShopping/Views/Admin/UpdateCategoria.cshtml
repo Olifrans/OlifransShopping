@@ -1,0 +1,47 @@
+﻿@model OlifransShopping.Models.CategoriaDetalhes
+@{
+    ViewBag.Title = "UpdateCategoria";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>UpdateCategoria</h2>
+
+
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item ">Categorias</li>
+        <li class="breadcrumb-item active">Adicionar Nova Categoria</li>
+
+
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Adicionar Nova Categoria
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("UpdateCategoria", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.CategoriaId)
+
+                <div class="form-group">
+                    <label class="control-label"> Nome Categoria</label>
+
+                    @Html.TextBoxFor(m => m.CategoriaNome, new { @class = "form-control", placeholder = "Digite o Nome da Nova Categoria", required = "required", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.CategoriaNome, "", new { @class = "text-danger" })
+                </div>
+
+                <a onclick="window.history.back();" class="btn btn-danger">Cancelar</a>
+                <input type="submit" class="btn btn-primary" value="Salvar" />
+            }
+        </div>
+    </div>
+</div>

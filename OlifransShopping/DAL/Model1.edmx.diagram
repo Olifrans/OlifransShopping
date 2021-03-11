@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b75521cf943347a3aaeba8c096fcd32b" Name="Diagram1">
+        <EntityTypeShape EntityType="OlifransShoppingModel.Carrinho" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.CarrinhoStatus" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.Categoria" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.Cliente" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.ClienteIdentificacao" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.DetalhesCompra" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.Identificacao" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.Produto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlifransShoppingModel.SlidImage" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="OlifransShoppingModel.FK__Carrinho__Produt__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="OlifransShoppingModel.FK__Produto__Categor__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="OlifransShoppingModel.FK__DetalhesC__Clien__0F624AF8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

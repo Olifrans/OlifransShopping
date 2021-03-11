@@ -1,0 +1,66 @@
+﻿@model List<OlifransShopping.DAL.Categoria>
+@{
+    ViewBag.Title = "Categorias";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Categorias</h2>
+
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Categorias</li>
+
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Detalhes da Categoria
+            <a href="../Admin/AddCategoria" class="btn btn-info pull-right fa fa-plus">Adcionar Categoria</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome da Categoria</th>
+                            <th>Acão</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nome da Categoria</th>
+                            <th>Acão</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@(Model.IndexOf(item)+1)</td>
+                                <td>@item.CategoriaNome</td>
+                                <td>
+                                    @Html.ActionLink("Editar", "EditarCategoria", new { catId = item.CategoriaId })
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
