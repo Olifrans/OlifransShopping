@@ -20,7 +20,7 @@
 
         <div class="item active">
             <div class="carousel-item active">
-                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/carr1.jpg" alt="First slide">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/frut01.jpg" alt="First slide">
             </div>
             <div class="carousel-caption">
                 <h3>Frutas  Vrduras Naturais Produzidos Sem Agredir a Natureza</h3>
@@ -30,7 +30,7 @@
 
         <div class="item">
             <div class="carousel-item active">
-                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/car3.jpg" alt="First slide">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/frut02.jpg" alt="First slide">
             </div>
             <div class="carousel-caption">
                 <h3> Preservando terras, matas, nascentes.</h3>
@@ -39,7 +39,7 @@
 
         <div class="item">
             <div class="carousel-item active">
-                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/car7.jpg" alt="First slide">
+                <img class="d-block w-100" style="height:320px; width:100%" src="../Images/frut04.jpg" alt="First slide">
             </div>
             <div class="carousel-caption">
                 <h3>Os mais belos quadros</h3>
@@ -95,13 +95,18 @@
                     <p>
                         @if (item.Quantidade > 0)
                         {
-                        <p>Disponível </p>
-                            }
+                            using (Html.BeginForm("AddToCarrinho", "Home", new { produtoId = item.ProdutoId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right"> <i class="fa fa-shopping-cart"></i> </button>
+                           }                   
+                             <p>Disponível </p>
+                         }
                             else
                             {
                                 <p>Não Disponível </p>
                             }
-                       </p>
+                     </p>
+
                         <div class="product-item-badge">
                             @if (item.EmDestaque == true)
                             {

@@ -79,10 +79,6 @@ namespace OlifransShopping.Controllers
         }
 
 
-
-
-
-
         public ActionResult Produtos()
         {
            return View(_unitOfWork.GetRepositoryInstance<Produto>().GetProduto());
@@ -109,9 +105,7 @@ namespace OlifransShopping.Controllers
             tbl.ProdutoImage = file != null ? pic : tbl.ProdutoImage;
             tbl.ModificadoData = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Produto>().Update(tbl);
-            return RedirectToAction("Produtos");
-
-            
+            return RedirectToAction("Produtos");         
         }
 
 
@@ -121,10 +115,10 @@ namespace OlifransShopping.Controllers
             return View();
         }
         
+
         [HttpPost]
         public ActionResult AddPoduto(Produto tbl,HttpPostedFileBase file)
         {
-
             string pic = null;
             if (file != null)
             {
@@ -137,7 +131,6 @@ namespace OlifransShopping.Controllers
             tbl.CriadoData = DateTime.Now;
             _unitOfWork.GetRepositoryInstance<Produto>().Add(tbl);
             return RedirectToAction("Produtos");
-
         }
 
     }
