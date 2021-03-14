@@ -53,7 +53,7 @@
 
 
 
-                @*Adcionar produto ao Carrinho*@
+                @*Adcionar e remove produtos ao Carrinho*@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">Carrinho<b class="caret"></b></a>
@@ -62,10 +62,8 @@
                             {
                                 foreach (Item item in (List<Item>)Session["carrinho"])
                                 {
-                                    <li>
-                                       <a href="@Url.Action("", "Home", new { produtoId=item.Produto.ProdutoId})">@item.Produto.ProdutoNome (@item.Quantidade) <i class="fa fa-times"></i></a>
-                                       @*<a href="@Url.Action("@*RemoveFromCarrinho*@", "Home", new { produtoId=item.Produto.ProdutoId})">@item.Produto.ProdutoNome (@item.Quantidade) <i class="fa fa-times"></i></a>*@
-                                              
+                                    <li>                                       
+                                        <a href="@Url.Action("RemoveFromCarrinho", "Home", new { produtoId=item.Produto.ProdutoId})">@item.Produto.ProdutoNome (@item.Quantidade)<i class="fa fa-times"></i></a>   
                                     </li>
                                 }
                             }

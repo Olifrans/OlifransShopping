@@ -38,18 +38,62 @@ namespace OlifransShopping.Controllers
             else
             {
                 List<Item> carrinho = (List<Item>) Session["carrinho"];
-
                 var produto = ctx.Produto.Find(produtoId);
-                carrinho.Add(new Item()
+
+                foreach (var item in carrinho) //Contador somatorio do mesmo produto no carrinho
                 {
-                    Produto = produto,
-                    Quantidade = 1
-                });
+                    if(item.Produto.ProdutoId == produtoId)
+                    {
+                        int prevQty = item.Quantidade;
+                        carrinho.Remove(item);
+
+                        carrinho.Add(new Item()
+                        {
+                            Produto = produto,
+                            Quantidade = prevQty+1
+                        });
+                        break;
+                    }
+                    else
+                    {
+                        carrinho.Add(new Item()
+                        {
+                            Produto = produto,
+                            Quantidade = 1
+                        });
+                    }
+                }
                 Session["carrinho"] = carrinho;
             }
- 
             return Redirect("Index");
         }
+
+
+
+
+
+        public ActionResult RemoveFromCarrinho(int produtoId)
+        {
+            List<Item> carrinho = (List<Item>)Session["carrinho"];
+
+            foreach (var item in carrinho)
+            {
+                if (item.Produto.ProdutoId == produtoId)
+                {
+                    carrinho.Remove(item);
+                    break;
+                }
+            }
+            Session["carrinho"] = carrinho;
+            return Redirect("Index");
+        }
+
+
+
+
+
+
+
 
 
 
