@@ -43,9 +43,14 @@
                         <th>Ação</th>
                     </tr>
                 </tfoot>
+
+
+
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        
+
                         int count = 1;
                         <tr>
                             <td>@count</td>
@@ -54,7 +59,11 @@
                             <td>@item.CategoriaId</td>
                             <td>@item.Quantidade</td>
                             <td>@item.PrecoUnitario</td>
-                            <td>@item.Quantidade * @item.PrecoUnitario</td>
+
+                            <td>
+                                @item.Quantidade * @item.PrecoUnitario
+                            </td>
+
                             <td>@item.ProdutoImage</td>
                             <td>
                                 @Html.ActionLink("Editar", "EditarProduto", new { produtoId = item.ProdutoId })

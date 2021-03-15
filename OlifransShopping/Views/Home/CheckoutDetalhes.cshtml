@@ -1,0 +1,69 @@
+﻿@using OlifransShopping.Models.Home;
+
+@*@{
+    ViewBag.Title = "CheckoutDetalhes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}*@
+
+
+@{
+    ViewBag.Title = "CheckoutDetalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>CheckoutDetalhes</h2>
+
+@if (Session["carrinho"] == null)
+{
+<div class="alert alert-danger">
+    <strong>Não há produto adicionado a carrinho!</strong>
+ 
+</div>
+
+}
+else
+
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Qty Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int Total = 0;
+            }
+            @foreach (Item item in (List<Item>)Session["carrinho"])
+            {
+                int lineTotal = Convert.ToInt32(item.Quantidade * item.Produto.PrecoUnitario);
+                Total = Convert.ToInt32(@Total + lineTotal);
+
+                Session["SesTotal"] = Total;
+
+                <tr>
+                    <td>@item.Produto.ProdutoNome</td>
+                    <td>@item.Produto.PrecoUnitario</td>
+                    <td>@item.Quantidade</td>
+                    <td>@lineTotal</td>
+                </tr>
+            }
+
+            <tr>
+                <td colspan="4" class="text-right"><b>Total: @Total</b></td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <a href="@Url.Action("PagamentoWithPaypal", "Pagamento")" class="btn btn-success">Pagamento >></a>
+
+}
+
+
+

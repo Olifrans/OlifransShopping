@@ -55,7 +55,9 @@ namespace OlifransShopping.Controllers
         public ActionResult UpdateCategoria(int categoriaId)
         {
             CategoriaDetalhes cd;
+#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             if (categoriaId != null)
+#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
             {
                 cd = JsonConvert.DeserializeObject<CategoriaDetalhes>(JsonConvert.SerializeObject(_unitOfWork.GetRepositoryInstance<Categoria>().GetFirstorDefault(categoriaId)));
             }
@@ -107,6 +109,7 @@ namespace OlifransShopping.Controllers
             _unitOfWork.GetRepositoryInstance<Produto>().Update(tbl);
             return RedirectToAction("Produtos");         
         }
+
 
 
         public ActionResult AddPoduto()
