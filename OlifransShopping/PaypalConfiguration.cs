@@ -15,8 +15,8 @@ namespace OlifransShopping
         static PaypalConfiguration()
         {
             var config = getconfig();
-            clienteId = "Digite o código Api fornecido pela PayPal";
-            clienteSecret = "Digite o código Api fornecido pela PayPal";
+            clienteId = "Digite o código API fornecido pela operadora PayPal";
+            clienteSecret = "Digite o código API fornecido pela operadora PayPal";
         }
                
 
